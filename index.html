@@ -417,7 +417,30 @@
     .section, .faq-section, .pricing-section, .results-section { padding: 48px 18px; }
     .section-head { margin-bottom: 26px; }
     .section-head h2, .section-title, .results-section h2 { font-size: 26px; line-height: 1.15; }
-    .services-grid { grid-template-columns: 1fr; }
+    .services-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.services-grid::-webkit-scrollbar {
+  height: 5px;
+}
+
+.services-grid::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 10px;
+}
+
+.service-card {
+  min-width: 260px;
+  max-width: 280px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
     .map { min-height: 260px; }
     .seo-info { padding: 22px 18px; }
     .seo-info .fact { grid-template-columns: 1fr; gap: 4px; }
@@ -432,8 +455,8 @@
     .site-foot .fine { flex-direction: column; gap: 8px; }
     .wa-fab { right: 12px; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); padding: 12px 14px; }
     .wa-fab .wa-label { display: none; }
-    .mobile-book-bar { display: block; }
-    body { padding-bottom: 80px; }
+    /* .mobile-book-bar { display: block; }
+    body { padding-bottom: 80px; } */
     .ba-wrap { aspect-ratio: 4/3; }
     .price-row { grid-template-columns: 1.1fr 0.9fr; padding: 13px 18px; }
     .testi-card { padding: 24px 18px; border-radius: 16px; }
@@ -530,6 +553,40 @@
 <div><strong>Honest, no-pressure care</strong><p>Transparent pricing. Pay per session. We give you a written plan — never push unnecessary packages.</p></div>
 </div>
 </div>
+<!-- BEFORE / AFTER RESULTS -->
+<section class="results-section" id="results">
+<div class="section-head" data-reveal="">
+<div>
+<span class="eyebrow">Real results</span>
+<h2>Real before & after results. No filters. No tricks.</h2>
+</div>
+<p class="kicker" style="color:oklch(0.72 0.01 var(--hue));">Slide to compare BEFORE and AFTER results. Each case treated by our dermatologists in-clinic with US-FDA approved devices.</p>
+</div>
+<div class="result-tabs" role="tablist">
+<button class="r-tab active" data-case="0" role="tab">Cystic Acne</button>
+<button class="r-tab" data-case="1" role="tab">Melasma</button>
+<button class="r-tab" data-case="2" role="tab">Acne Scars</button>
+</div>
+<div class="ba-wrap" data-reveal="">
+  <!-- ADD THIS -->
+  <div class="ba-label before">BEFORE</div>
+  <div class="ba-label after">AFTER</div>
+
+  <!-- <div class="ba-badge">3 months • 4 sessions</div> -->
+  <div class="ba-before" id="baBefore">
+    <img src="images/compressed_before-noida-24.png" alt="Before" />
+  </div>
+  <div class="ba-after" id="baAfter">
+    <img src="images/compressed_after-noida-24.png" alt="After" />
+  </div>
+  <div class="ba-divider" id="baDivider"></div>
+  <div class="ba-slider-wrap">
+    <input aria-label="Drag to compare before and after" id="baRange" max="100" min="0" style="width:100%;cursor:pointer;accent-color:white;" type="range" value="50"/>
+  </div>
+</div>
+<p class="result-caption" id="resultCaption">24-year-old from Noida. 3 months, 4 salicylic peels + medical skincare protocol. ~70% reduction in active acne and post-inflammatory marks.</p>
+<p class="result-disclaimer">Individual results vary. All cases treated at Saanvi clinic. Photos used with patient consent. Treatments optimised for Indian skin types III–V.</p>
+</section>
 <!-- SERVICES -->
 <section class="section" id="services">
 <div class="section-head" data-reveal="">
@@ -582,38 +639,7 @@
 </article>
 </div>
 </section>
-<!-- BEFORE / AFTER RESULTS -->
-<section class="results-section" id="results">
-<div class="section-head" data-reveal="">
-<div>
-<span class="eyebrow">Real results</span>
-<h2>Real before & after results. No filters. No tricks.</h2>
-</div>
-<p class="kicker" style="color:oklch(0.72 0.01 var(--hue));">Slide to compare BEFORE and AFTER results. Each case treated by our dermatologists in-clinic with US-FDA approved devices.</p>
-</div>
-<div class="result-tabs" role="tablist">
-<button class="r-tab active" data-case="0" role="tab">Cystic Acne</button>
-<button class="r-tab" data-case="1" role="tab">Melasma</button>
-<button class="r-tab" data-case="2" role="tab">Acne Scars</button>
-</div>
-<div class="ba-wrap" data-reveal="">
-  <!-- ADD THIS -->
-  <div class="ba-label before">BEFORE</div>
-  <div class="ba-label after">AFTER</div>
-  <div class="ba-before" id="baBefore">
-    <img src="images/compressed_before-noida-24.png" alt="Before" />
-  </div>
-  <div class="ba-after" id="baAfter">
-    <img src="images/compressed_after-noida-24.png" alt="After" />
-  </div>
-  <div class="ba-divider" id="baDivider"></div>
-  <div class="ba-slider-wrap">
-    <input aria-label="Drag to compare before and after" id="baRange" max="100" min="0" style="width:100%;cursor:pointer;accent-color:white;" type="range" value="50"/>
-  </div>
-</div>
-<p class="result-caption" id="resultCaption">24-year-old from Noida. 3 months, 4 salicylic peels + medical skincare protocol. ~70% reduction in active acne and post-inflammatory marks.</p>
-<p class="result-disclaimer">Individual results vary. All cases treated at Saanvi clinic. Photos used with patient consent. Treatments optimised for Indian skin types III–V.</p>
-</section>
+
 <!-- TESTIMONIALS -->
 <section class="section soft" id="testimonials">
 <div class="section-head" data-reveal="">
